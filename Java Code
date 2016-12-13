@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class ConjeturaCollatz {
+
+	public static void main(String[] args) {
+		Scanner teclado = new Scanner(System.in);
+		long num; 
+		int repeticiones=0;
+		
+		System.out.println("¿No conoces la  Conjetura de Collatz o Conjetura 3n+1? ");
+		System.out.println("Es muy sencillo: Tú me das un número entero natural cualquiera y ");
+		System.out.println("después de seguir los pasos propios a dicho problema seguro que llegamos al número 1 \n");
+		
+		do{
+			System.out.println("Dame un número entero natural distinto del 1 (p.e. 2,3,4,5,...): ");
+			num = teclado.nextLong();
+		}while(num<2);
+		
+		do{
+			if(esPar(num)){
+				num = procesoPar(num);	
+				System.out.println("Como es par divido entre dos, ahora tenemos: "+num);
+			}else{
+				num = procesoImpar(num);
+				System.out.println("Como es impar lo multiplico por 3 y le sumo 1: " +num );
+			}
+			repeticiones++;
+		}while(num!=1); //Cuando valga 1 ya habremos llegado a la solución
+		
+    System.out.println("\nFinalmente llegamos (como habíamos previsto) al " +num);
+		System.out.println("Ha necesitado "+repeticiones+" iteraciones para el cálculo");		
+	}
+	
+	public static boolean esPar(long num){ //Método para comprobar simplemente si es par o impar
+		if(num%2==0)
+			return true;
+		return false;
+	}
+	
+	public static long procesoPar(long n){
+		return n/2;
+	}
+	
+	public static long procesoImpar(long n){
+		return n*3+1;
+	}	
+}
